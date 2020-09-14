@@ -1,10 +1,12 @@
 FROM centos:centos7
 
+#追加
+COPY bin/sp.repo /etc/yum.repos.d
+
 # Shibboleth SPモジュールその他必要なものをインストールする。
 RUN yum -y update \
     && yum -y install wget patch \
-    && wget http://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo -P /etc/yum.repos.d \
-    && yum -y install httpd shibboleth-3.0.3-1.1 mod_ssl php \
+    && yum -y install httpd shibboleth-3.1.0-3.1 mod_ssl php \
     && yum -y clean all
 
 # Shibboleth SPモジュールを起動するためのスクリプトをコンテナにコピーする。
